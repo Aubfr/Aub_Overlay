@@ -15,6 +15,10 @@ Overlay Windows léger permettant d’afficher son MMR Rocket League en temps r�
 -  Fermeture propre via menu tray
 -  Support des comptes Epic Games
 
+<img width="203" height="69" alt="Capture d&#39;écran 2026-05-23 135201" src="https://github.com/user-attachments/assets/d634b47c-244e-44c2-81c5-6237bb5972f2" />
+<img width="68" height="63" alt="Capture d&#39;écran 2026-05-23 135210" src="https://github.com/user-attachments/assets/24489f53-4df7-48c2-a369-8b0f739964e1" />
+
+
 ---
 
 ## 📦 Installation
