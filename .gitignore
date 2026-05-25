@@ -2,4 +2,6 @@ venv/
 build/
 dist/
 cache.json
-*.spec
+*.
+build.bat
+config.json
