@@ -1,170 +1,136 @@
 # Aub_OverlayRL
 
-Un overlay Windows pour **Rocket League** qui affiche en temps réel ton **MMR (2v2)**, ton ratio **Wins / Losses de session**, et ta **win/loss streak**, par-dessus le jeu. L'overlay change de teinte selon ton équipe (bleue ou orange) pour rester cohérent avec le HUD du jeu.
+> **Overlay stats Rocket League** — MMR en temps réel, suivi W/L de session, streak et lueur dynamique.
 
 ---
 
-## Fonctionnalités
+## ✨ Fonctionnalités
 
-- Affichage en haut à droite de l'écran, par-dessus Rocket League
-- **MMR** récupéré depuis `tracker.gg` (segment Ranked Doubles 2v2)
-- **Wins / Losses de session** comptés automatiquement à partir des variations de MMR
-- **Streak de session** (🔥 Win Streak / 🧊 Loss Streak)
-- **Teinte dynamique de l'overlay** selon l'équipe :
-  - Bleue quand tu joues équipe Blue
-  - Orange quand tu joues équipe Orange
-  - Mode Auto (détection par échantillonnage de pixels) ou Manuel (via le menu de la system tray)
-- **Click-through** : l'overlay ne peut pas voler le focus ni bloquer tes clics
-- **Apparaît uniquement quand Rocket League est au premier plan** (alt-tab → overlay caché)
-- **Blur Windows natif** derrière le panneau (effet acrylique)
-- **System tray** avec icône, menu clic droit (`Team tint`, `Reset session`, `Quit`)
-- **Fenêtre de statut** dans la barre des tâches Windows qui indique si RL est lancé ou non
+- 🎯 **MMR en direct** via l'API tracker.gg (pseudo Epic Games)
+- 📊 **Suivi de session** — Wins, Losses, Streak, Delta MMR
+- 🌟 **Lueur dynamique** — orange si streak positif, bleu si négatif, neutre sinon
+- 🎨 **6 styles d'overlay** — Blade, Bar, Tiles, Compact, Pill, Hexagon
+- 📐 **Positionnement libre** — sliders X/Y ou glisser-déposer en mode édition
+- 🔁 **Détection automatique** — l'overlay apparaît uniquement quand Rocket League est au premier plan
+- 🕹️ **Actions manuelles** — ajouter/supprimer des wins/losses, reset de session
+- 🌍 **Bilingue** — Français / English
+- 🗂️ **Dossier de données configurable** — AppData par défaut ou chemin personnalisé
+- 🖥️ **Dashboard complet** avec animation de démarrage et halos animés
 
 ---
 
-## Installation (utilisateur final)
+## 📸 Aperçu
 
-1. Télécharge `Aub_OverlayRL.exe`
-2. Double-clique dessus
-3. Au premier lancement, entre ton **nom d'utilisateur Epic Games** (celui qui apparaît en jeu)
+| Dashboard | Overlay in-game |
+|:---------:|:---------------:|
+| *(screenshot)* | *(screenshot)* |
+
+---
+
+## 🚀 Installation
+
+### Méthode recommandée — `.exe` standalone
+
+1. Télécharge le dernier `AubOverlayRL.exe` dans les [Releases](../../releases)
+2. Double-clique → l'assistant de premier lancement s'ouvre
+3. Entre ton pseudo Epic Games exactement tel qu'en jeu
 4. Lance Rocket League — l'overlay apparaît automatiquement
-5. Joue normalement
 
-Pour quitter l'app : clic droit sur l'icône dans la system tray → `Quit`.
-
-> Le username est sauvegardé dans `config.json` à côté du `.exe`. Pour le changer, supprime ce fichier et relance.
+> ⚠️ **Aucune installation requise.** Un seul fichier `.exe`, pas de dépendances.
+> ⚠️ **Il faut quitter l'application en cliquant sur quitter et pas sur la fenêtre sinon l'appplication tournera en fond !**
 
 ---
 
-## Compilation depuis les sources
 
-### Prérequis
+## ⚙️ Configuration
 
-- Python 3.10+
-- Windows 10/11
+Les fichiers de configuration sont stockés dans `%LOCALAPPDATA%\Aub_OverlayRL\` par défaut.
 
-### Installer les dépendances
+| Fichier | Contenu |
+|---------|---------|
+| `config.json` | Préférences utilisateur (pseudo, style, position, langue…) |
+| `cache.json` | Cache MMR tracker.gg (TTL : 30 secondes) |
+| `bootstrap.json` | Pointeur vers le dossier de données si personnalisé |
 
-```bash
-pip install PySide6 curl_cffi psutil pywin32 pyinstaller
-```
-
-### Build
-
-Place `Aub_OverlayRL.py` et `icone.ico` dans le même dossier, puis :
-
-```bash
-pyinstaller --onefile --noconsole --icon=icone.ico --add-data \"icone.ico;.\" --name Aub_OverlayRL Aub_OverlayRL.py
-```
-
-Ou double-clique sur `build.bat` fourni.
-
-Le `.exe` final est dans `dist/Aub_OverlayRL.exe`.
+Tu peux changer l'emplacement depuis **Réglages → Dossier de données**.
 
 ---
 
-## Limitations connues
+## 🎮 Utilisation
 
-- **Fonctionne en Borderless Windowed ou Windowed uniquement.** En **Fullscreen exclusif**, Windows bloque tous les overlays externes (limite système, pas du code). Passe en Borderless dans les options vidéo de Rocket League.
-- La détection automatique d'équipe (bleue/orange) se base sur l'analyse de quelques pixels du HUD. Elle peut rater selon la résolution ou la caméra → dans ce cas, choisis manuellement l'équipe via la system tray (`Team tint > Blue` ou `Orange`).
-- L'app dépend de l'API `tracker.gg`. Si tracker.gg est down ou bloque la requête, le MMR ne se mettra pas à jour temporairement (un cache de 30s amortit le coup).
+### Premier lancement
+L'assistant te guide en 4 étapes :
+1. Présentation de l'app
+2. Choix du dossier de données
+3. Saisie du pseudo Epic Games *(obligatoire)*
+4. Conseils d'utilisation
 
----
+### Dashboard
+- **Bannière** — état de Rocket League, connexion tracker.gg et mode de lueur
+- **Stats** — Wins / Losses / Streak / MMR / Rang en temps réel
+- **Actions manuelles** — corriger le compteur si une partie n'est pas détectée
 
-## Pourquoi cette application n'est pas dangereuse
+### Overlay
+- S'affiche automatiquement quand Rocket League est au premier plan
+- **Mode Borderless Windowed** recommandé dans RL
+- Positionnement via les sliders ou en cliquant **"Déplacer l'overlay à la souris"**
 
-Beaucoup d'antivirus signalent les `.exe` Python compilés via PyInstaller comme « suspects », **simplement parce que PyInstaller embarque un interpréteur Python dans le binaire** — un schéma souvent vu chez les malwares. C'est un **faux positif classique**. Voici exactement ce que fait l'app et, surtout, **ce qu'elle ne fait pas** :
+### Playlists supportées
+| Ranked | Casual | Extra modes |
+|--------|--------|-------------|
+| 1v1, 2v2, 3v3 | 1v1, 2v2, 3v3 | Hoops, Rumble, Dropshot, Snow Day |
 
-### Ce que fait l'app
-
-| Action | But |
-|---|---|
-| Lit la liste des processus Windows | Détecter si `RocketLeague.exe` tourne (`psutil`) |
-| Lit le **titre** de la fenêtre active | Savoir si Rocket League est au premier plan (`win32gui.GetForegroundWindow`) |
-| Fait une requête HTTPS vers `api.tracker.gg` | Récupérer ton MMR public (site déjà accessible dans un navigateur) |
-| Lit quelques pixels de l'écran (~6 points près du boost meter) | Détecter la couleur de ton équipe pour teinter l'overlay |
-| Écrit deux fichiers à côté du `.exe` | `config.json` (ton pseudo Epic) + `cache.json` (cache MMR 30s) |
-| Affiche une fenêtre Qt transparente | L'overlay lui-même |
-
-### Ce que l'app **ne fait pas**
-
-- ❌ **Aucune lecture de la mémoire de Rocket League** (pas de cheat, pas de DLL injectée, pas de hook)
-- ❌ **Aucune modification du jeu** ni de ses fichiers
-- ❌ **Aucune interaction réseau avec les serveurs Psyonix/Epic** (l'app ne parle qu'à `tracker.gg`)
-- ❌ **Pas de keylogger, pas de capture clavier/souris**
-- ❌ **Aucun envoi de données personnelles** vers un serveur tiers
-- ❌ **Aucun accès aux fichiers du système** (sauf les 2 fichiers JSON dans son propre dossier)
-- ❌ **Aucune persistance au démarrage** (l'app ne s'inscrit pas dans le registre ou le démarrage Windows)
-- ❌ **Compatible avec les Terms of Service de Rocket League** : c'est un overlay externe purement lecture, pas un mod / cheat / trainer (même catégorie qu'OBS, Discord overlay, etc.)
-
-### Code source ouvert
-
-Le code source complet est dans `Aub_OverlayRL.py` (~500 lignes lisibles). Tu peux le compiler toi-même avec la commande ci-dessus → tu n'as pas à faire confiance au `.exe` que je distribue, **tu peux rebuild le tien**.
-
-### Pour vérifier toi-même
-
-- Inspecte le `.exe` avec [VirusTotal](https://www.virustotal.com/) (attends-toi à 0-3 faux positifs sur ~70 moteurs, c'est le bruit habituel pour un build PyInstaller)
-- Surveille les connexions réseau avec **Wireshark** ou **TCPView** → tu ne verras que des requêtes HTTPS vers `api.tracker.gg`
-- Surveille les accès fichiers avec **Process Monitor** → tu ne verras que `config.json` et `cache.json` dans le dossier de l'app
+> Les playlists **Casual** n'ont pas de suivi W/L automatique (pas de rang compétitif).
 
 ---
 
-## Pourquoi la « capture de pixels » n'est pas un risque pour ta vie privée
+## 🌟 Styles d'overlay
 
-L'overlay lit quelques pixels de l'écran pour détecter la couleur de ton équipe. Voilà précisément ce qui se passe et **pourquoi c'est totalement inoffensif** :
-
-### Ce qui est lu
-
-- **6 pixels** uniquement, dans une zone précise du HUD de Rocket League (bottom-right, près du boost meter)
-- **Toutes les 1,5 secondes**, et **uniquement quand Rocket League est au premier plan**
-- L'app récupère **les composantes R/G/B** de ces pixels, rien d'autre
-
-### Ce qui n'est PAS fait
-
-- ❌ **Aucune capture d'écran complète n'est jamais effectuée** (pas de `screenshot()`, pas de `BitBlt` sur la fenêtre entière)
-- ❌ **Aucune image n'est sauvegardée sur le disque**
-- ❌ **Aucune image n'est envoyée sur le réseau** (l'app ne parle qu'à `tracker.gg` pour récupérer du JSON)
-- ❌ **Les pixels lus sont immédiatement réduits à un score \"blue hits\" / \"orange hits\"** puis jetés
-- ❌ **Si tu n'es pas dans Rocket League, l'analyse de pixels est désactivée** (vérifié à chaque tick via `is_rl_focused()`)
-
-### Le code exact qui fait ça
-
-Tu peux le retrouver dans `Aub_OverlayRL.py`, fonction `detect_team_color()`. Il utilise l'API Windows standard `GetPixel` pour 6 coordonnées précises, compare les valeurs RGB à des seuils, et retourne uniquement la chaîne `\"blue\"`, `\"orange\"` ou `None`. Pas de buffer image, pas de stockage, pas de transmission.
-
-### Et si tu veux désactiver complètement ça
-
-Clic droit sur l'icône system tray → `Team tint > Off`. La fonction `detect_team_color()` ne sera plus jamais appelée. Tu peux aussi sélectionner manuellement `Blue` ou `Orange` pour figer la teinte sans aucun sampling.
+| Style | Description |
+|-------|-------------|
+| **Default** | Parallélogramme incliné — style esport signature |
+| **Bar** | Barre horizontale arrondie |
+| **Tiles** | Tuiles séparées par stat |
+| **Compact** | Version minimale, petite taille |
+| **Pill** | Colonnes verticales empilées |
+| **Hexagon** | Forme hexagonale angulaire |
 
 ---
 
-## Données stockées localement
+## 🔧 Détails techniques
 
-Deux fichiers, **uniquement à côté du `.exe`**, **jamais transmis** :
-
-- `config.json` → `{ \"username\": \"TonPseudoEpic\" }`
-- `cache.json` → `{ \"TonPseudoEpic\": { \"mmr\": 1234.5, \"timestamp\": 1234567890 } }` (cache anti-spam de l'API tracker.gg)
-
-Pour tout effacer : supprime ces deux fichiers.
-
----
-
-## Désinstallation
-
-Supprime le dossier qui contient `Aub_OverlayRL.exe`, `config.json` et `cache.json`. C'est tout. Aucune trace ailleurs sur ton système.
+- **API** : tracker.gg (`/api/v2/rocket-league/standard/profile/epic/{username}`)
+- **Détection RL** : scan des processus via `psutil` toutes les 3 secondes
+- **Détection focus** : `win32gui.GetForegroundWindow()` toutes les 500 ms (nécessite `pywin32`)
+- **Cache MMR** : TTL de 30 secondes, stocké en JSON local
+- **Rendu overlay** : 100% Qt (`QPainter`, `WA_TranslucentBackground`), pas de BlurBehind Windows
+- **Données** : aucune persistance de session (reset au lancement de RL)
 
 ---
 
-## Crédits
+## ❓ FAQ
 
-- API : [tracker.gg](https://tracker.gg/)
-- UI : [PySide6](https://wiki.qt.io/Qt_for_Python) (Qt)
-- HTTP : [curl_cffi](https://github.com/yifeikong/curl_cffi)
-- Détection process : [psutil](https://github.com/giampaolo/psutil)
-- Win32 API : [pywin32](https://github.com/mhammond/pywin32)
-- Build : [PyInstaller](https://pyinstaller.org/)
+**L'overlay ne s'affiche pas**
+→ Vérifie que Rocket League est en **Borderless Windowed** et au premier plan. Si `pywin32` n'est pas installé, l'overlay est toujours visible (Status → pywin32 : non installé).
+
+**Le MMR n'est pas récupéré**
+→ Le pseudo Epic Games doit être **exactement** celui affiché sur tracker.gg. Vérifie dans Réglages.
+
+**Les W/L ne sont pas comptés**
+→ La détection est basée sur les changements de MMR. En **Casual**, le suivi automatique est désactivé.
+
+**L'overlay apparaît derrière le jeu**
+→ Passe Rocket League en **Borderless Windowed** (pas Fullscreen exclusif).
 
 ---
 
-## Licence
+## 🤝 Support & Communauté
 
-Usage personnel. Pas de redistribution sans permission.
+Rejoins le Discord pour du support, des annonces et retours :
+
+[![Discord](https://img.shields.io/badge/Discord-Rejoindre-5865F2?logo=discord&logoColor=white)](https://discord.gg/uMQBhs3UqH)
+
+---
+
+
+*Fait avec par **Aub** — non affilié à Psyonix / Epic Games / tracker.gg*
