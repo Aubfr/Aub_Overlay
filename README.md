@@ -1,4 +1,4 @@
-# Aub_OverlayRL
+# AubOverlayRL
 
 > **Overlay stats Rocket League** — MMR en temps réel, suivi W/L de session, streak et lueur dynamique.
 
