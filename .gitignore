@@ -6,3 +6,8 @@ cache.json
 build.bat
 config.json
 *.spec
+main.py
+rank/
+ancien/
+icone.ico
+icone.png
