@@ -2,6 +2,10 @@
 
 > **Overlay stats Rocket League** — MMR en temps réel, suivi W/L de session, streak et lueur dynamique.
 
+<img width="1609" height="1082" alt="image" src="https://github.com/user-attachments/assets/404afc2d-977c-433d-84b9-e6850327d45b" />
+
+<img width="766" height="97" alt="image" src="https://github.com/user-attachments/assets/9cb1c1c8-bcbe-443c-b4b6-2245425631e8" />
+
 ---
 
 ## ✨ Fonctionnalités
@@ -16,14 +20,6 @@
 - 🌍 **Bilingue** — Français / English
 - 🗂️ **Dossier de données configurable** — AppData par défaut ou chemin personnalisé
 - 🖥️ **Dashboard complet** avec animation de démarrage et halos animés
-
----
-
-## 📸 Aperçu
-
-| Dashboard | Overlay in-game |
-|:---------:|:---------------:|
-| *(screenshot)* | *(screenshot)* |
 
 ---
 
