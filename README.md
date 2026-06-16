@@ -1,4 +1,4 @@
-# AubOverlayRL
+# Aubverlay
 
 > **Overlay stats Rocket League** — MMR en temps réel, suivi W/L de session, streak et lueur dynamique.
 
@@ -27,7 +27,7 @@
 
 ### Méthode recommandée — `.exe` standalone
 
-1. Télécharge le dernier `AubOverlayRL.exe` dans les [Releases](../../releases)
+1. Télécharge le dernier `Aubverlay.exe` dans les [Releases](../../releases)
 2. Double-clique → l'assistant de premier lancement s'ouvre
 3. Entre ton pseudo Epic Games exactement tel qu'en jeu
 4. Lance Rocket League — l'overlay apparaît automatiquement
@@ -40,7 +40,7 @@
 
 ## ⚙️ Configuration
 
-Les fichiers de configuration sont stockés dans `%LOCALAPPDATA%\Aub_OverlayRL\` par défaut.
+Les fichiers de configuration sont stockés dans `%LOCALAPPDATA%\Aubverlay\` par défaut.
 
 | Fichier | Contenu |
 |---------|---------|
